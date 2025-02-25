@@ -2,11 +2,13 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Metadata\ApiResource;
 use App\Repository\TeamRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
+#[ApiResource]
 #[ORM\Entity(repositoryClass: TeamRepository::class)]
 class Team
 {
@@ -16,16 +18,16 @@ class Team
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private string $name;
+    private ?string $name = null;
 
     #[ORM\Column(length: 255)]
-    private string $city;
+    private ?string $city = null;
 
     #[ORM\Column]
-    private int $yearFounded;
+    private ?int $yearFounded = null;
 
     #[ORM\Column(length: 255)]
-    private string $stadiumName;
+    private ?string $stadiumName = null;
 
     /**
      * @var Collection<int, Player>
@@ -43,7 +45,7 @@ class Team
         return $this->id;
     }
 
-    public function getName(): string
+    public function getName(): ?string
     {
         return $this->name;
     }
@@ -51,10 +53,11 @@ class Team
     public function setName(string $name): static
     {
         $this->name = $name;
+
         return $this;
     }
 
-    public function getCity(): string
+    public function getCity(): ?string
     {
         return $this->city;
     }
@@ -62,10 +65,11 @@ class Team
     public function setCity(string $city): static
     {
         $this->city = $city;
+
         return $this;
     }
 
-    public function getYearFounded(): int
+    public function getYearFounded(): ?int
     {
         return $this->yearFounded;
     }
@@ -73,10 +77,11 @@ class Team
     public function setYearFounded(int $yearFounded): static
     {
         $this->yearFounded = $yearFounded;
+
         return $this;
     }
 
-    public function getStadiumName(): string
+    public function getStadiumName(): ?string
     {
         return $this->stadiumName;
     }
@@ -84,6 +89,7 @@ class Team
     public function setStadiumName(string $stadiumName): static
     {
         $this->stadiumName = $stadiumName;
+
         return $this;
     }
 
@@ -101,6 +107,7 @@ class Team
             $this->players->add($player);
             $player->setTeam($this);
         }
+
         return $this;
     }
 
