@@ -12,6 +12,7 @@ use ApiPlatform\Metadata\Post;
 use App\Repository\PlayerRepository;
 use App\State\Processor\PlayerProcessor;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: PlayerRepository::class)]
 #[ApiResource(
@@ -32,23 +33,41 @@ class Player
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: "First name is required.")]
+    #[Assert\Length(
+        max: 255,
+        maxMessage: "First name cannot be longer than 255 characters."
+    )]
     #[ApiProperty(description: "The first name of the player")]
     private ?string $firstName = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: "Last name is required.")]
+    #[Assert\Length(
+        max: 255,
+        maxMessage: "Last name cannot be longer than 255 characters."
+    )]
     #[ApiProperty(description: "The last name of the player")]
     private ?string $lastName = null;
 
     #[ORM\Column]
+    #[Assert\NotBlank(message: "Age is required.")]
+    #[Assert\Positive(message: "Age must be a positive number.")]
     #[ApiProperty(description: "The player's age")]
     private ?int $age = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: "Position is required.")]
+    #[Assert\Choice(
+        choices: ["Goalkeeper", "Defender", "Midfielder", "Forward"],
+        message: "Invalid position. Choose one of: Goalkeeper, Defender, Midfielder, Forward."
+    )]
     #[ApiProperty(description: "The player's position on the field (e.g., Forward, Defender)")]
     private ?string $position = null;
 
     #[ORM\ManyToOne(targetEntity: Team::class, inversedBy: 'players')]
     #[ORM\JoinColumn(nullable: false, onDelete: "CASCADE")]
+    #[Assert\NotNull(message: "Player must be assigned to a team.")]
     private ?Team $team = null;
 
     public function getId(): ?int

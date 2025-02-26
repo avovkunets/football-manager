@@ -62,6 +62,6 @@ _Note: The {{baseUrl}} variable should be set to your API URL (e.g. http://footb
 To run unit and functional tests, execute: `vendor/bin/phpunit`
 
 ## Logging
-General Logs: Located in var/log/dev.log
-Notifications Logs: Dedicated logs for notifications are written to var/log/notifications.log 
+ - General Logs: Located in var/log/dev.log
+ - Notifications Logs: Dedicated logs for notifications are written to var/log/notifications.log 
 

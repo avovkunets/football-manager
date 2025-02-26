@@ -8,6 +8,7 @@ use App\Repository\TeamRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ApiResource]
 #[ORM\Entity(repositoryClass: TeamRepository::class)]
@@ -20,18 +21,39 @@ class Team
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: "Team name is required.")]
+    #[Assert\Length(
+        max: 255,
+        maxMessage: "Team name cannot be longer than 255 characters."
+    )]
     #[ApiProperty(description: "The name of the team")]
     private ?string $name = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: "City is required.")]
+    #[Assert\Length(
+        max: 255,
+        maxMessage: "City name cannot be longer than 255 characters."
+    )]
     #[ApiProperty(description: "The city where the team is based")]
     private ?string $city = null;
 
     #[ORM\Column]
+    #[Assert\NotBlank(message: "Year founded is required.")]
+    #[Assert\Positive(message: "Year founded must be a positive number.")]
+    #[Assert\LessThanOrEqual(
+        value: 2025,
+        message: "Year founded cannot be in the future."
+    )]
     #[ApiProperty(description: "The year when the team was founded")]
     private ?int $yearFounded = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: "Stadium name is required.")]
+    #[Assert\Length(
+        max: 255,
+        maxMessage: "Stadium name cannot be longer than 255 characters."
+    )]
     #[ApiProperty(description: "The name of the team's stadium")]
     private ?string $stadiumName = null;
 
