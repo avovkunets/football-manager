@@ -35,7 +35,7 @@ jobs:
             docker exec php8.3-fpm composer install
 
             echo "🔄 Running database migrations..."
-            docker exec php8.3-fpm bin/console doctrine:migrations:migrate --no-interaction
+            docker exec php8.3-fpm /var/www/html/fm/bin/console doctrine:migrations:migrate --no-interaction
 
             echo "✅ Deployment successful!"
           EOF
