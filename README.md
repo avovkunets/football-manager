@@ -25,10 +25,7 @@ This project is a RESTful API for managing football teams and players, built wit
    - git clone <repository_url>
    - cd football-manager
 
-2. Install dependencies:
-   - composer install
-
-3. Configure the environment: Ensure your `.env` file is set correctly, for example:
+2. Configure the environment: Ensure your `.env` file is set correctly, for example:
 
         ###> symfony/framework-bundle ###
         APP_ENV=dev
@@ -45,10 +42,12 @@ This project is a RESTful API for managing football teams and players, built wit
         MESSENGER_TRANSPORT_DSN=doctrine://default
         ###< symfony/messenger ###
 
+3. Install dependencies:
+   - composer install
+
 4. Run Database Migrations:
    - bin/console doctrine:database:create
    - bin/console doctrine:migrations:migrate
-
 
 ## Usage
 ### API Endpoints
