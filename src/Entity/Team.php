@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Metadata\ApiProperty;
 use ApiPlatform\Metadata\ApiResource;
 use App\Repository\TeamRepository;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -15,24 +16,30 @@ class Team
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[ApiProperty(description: "Unique identifier of the team")]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[ApiProperty(description: "The name of the team")]
     private ?string $name = null;
 
     #[ORM\Column(length: 255)]
+    #[ApiProperty(description: "The city where the team is based")]
     private ?string $city = null;
 
     #[ORM\Column]
+    #[ApiProperty(description: "The year when the team was founded")]
     private ?int $yearFounded = null;
 
     #[ORM\Column(length: 255)]
+    #[ApiProperty(description: "The name of the team's stadium")]
     private ?string $stadiumName = null;
 
     /**
      * @var Collection<int, Player>
      */
     #[ORM\OneToMany(targetEntity: Player::class, mappedBy: 'team', orphanRemoval: true)]
+    #[ApiProperty(description: "List of players belonging to the team")]
     private Collection $players;
 
     public function __construct()
