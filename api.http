@@ -1,0 +1,72 @@
+###############################################################################
+###                                  TEAMS                                  ###
+###############################################################################
+
+### 1. Get a list of all teams
+GET {{baseUrl}}/api/teams
+Accept: application/json
+
+### 2. Create a new team
+POST {{baseUrl}}/api/teams
+Content-Type: application/json
+Accept: application/json
+
+{
+  "name": "FC Karpaty",
+  "city": "Lviv",
+  "yearFounded": 1963,
+  "stadiumName": "Ukraine Stadium"
+}
+
+### 3. Get team details by ID=1
+GET {{baseUrl}}/api/teams/1
+Accept: application/json
+
+### 4. Update (PATCH) team's city
+PATCH {{baseUrl}}/api/teams/1
+Content-Type: application/merge-patch+json
+Accept: application/json
+
+{
+  "city": "LA"
+}
+
+### 5. Delete team
+DELETE {{baseUrl}}/api/teams/1
+
+###############################################################################
+###                                PLAYERS                                  ###
+###############################################################################
+
+### 6. Get a list of all players
+GET {{baseUrl}}/api/players
+Accept: application/json
+
+### 7. Create a new player
+POST {{baseUrl}}/api/players
+Content-Type: application/json
+Accept: application/json
+
+{
+  "firstName": "John",
+  "lastName": "Doe",
+  "age": 25,
+  "position": "Forward",
+  "team": "/api/teams/1"
+}
+
+### 8. Get player details by ID=1
+GET {{baseUrl}}/api/players/1
+Accept: application/json
+
+### 9. Update (PATCH) a player
+PATCH {{baseUrl}}/api/players/1
+Content-Type: application/merge-patch+json
+Accept: application/json
+
+{
+  "age": 26
+}
+
+### 10. Delete player
+DELETE {{baseUrl}}/api/players/1
